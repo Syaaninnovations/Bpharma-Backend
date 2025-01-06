@@ -1,21 +1,37 @@
-const DataTypes = require('sequelize');
-const database = require('../config/db');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-
-const Role = database.define('roles', {
-    role_id: {
+const Product = sequelize.define('products', {
+    product_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
     },
-    role_name: {
+    product_name: {
         type: DataTypes.STRING,
         allowNull: false,
+    },
+    product_code: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
     },
     is_active: {
         type: DataTypes.BOOLEAN,
         allowNull: false,
         defaultValue: false,
+    },
+    batch_no: {
+        type: DataTypes.STRING,
+        allowNull: true,
+    },
+    near_expiry: {
+        type: DataTypes.BOOLEAN,
+        allowNull: true,
+    },
+    packing: {
+        type: DataTypes.STRING,
+        allowNull: true,
     },
     created_on: {
         type: DataTypes.DATE,
@@ -33,9 +49,9 @@ const Role = database.define('roles', {
     updated_by: {
         type: DataTypes.INTEGER,
         allowNull: true,
-    }
+    },
 }, {
     timestamps: false,
 });
 
-module.exports = { Role };
+module.exports = { Product };
