@@ -1,8 +1,9 @@
 const Joi = require('joi');
 // Define the schema
-const roleSaveSchema = Joi.object({
-  role_name: Joi.string().min(3).max(255).required(),
-  is_active: Joi.number().integer().min(0).max(1).default(0),
+const stateSaveSchema = Joi.object({
+  state_code: Joi.string().required(),
+  state_name: Joi.string().required(),
+  country_id: Joi.number().integer().required(),
 });
 
 // Centralized validation function
@@ -14,4 +15,4 @@ function validate(data, schema) {
     return error.details.map((err) => ({ field: err.path[0], message: err.message  }));
   }
 
-module.exports = { validate, roleSaveSchema};
+module.exports = { validate, stateSaveSchema};

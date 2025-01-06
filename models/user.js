@@ -9,6 +9,10 @@ const User = database.define('users', {
         primaryKey: true,
         autoIncrement: true,
       },
+      emp_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
       emp_code: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -20,10 +24,6 @@ const User = database.define('users', {
       status_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        // references: {
-        //   model: 'statuses',
-        //   key: 'status_id',
-        // },
       },
       is_active: {
         type: DataTypes.BOOLEAN,
@@ -43,14 +43,6 @@ const User = database.define('users', {
         type: DataTypes.DATE,
         allowNull: true,
       },
-      user_role_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        // references: {
-        //   model: 'roles',
-        //   key: 'role_id',
-        // },
-      },
       updated_by: {
         type: DataTypes.INTEGER,
         allowNull: true,
@@ -59,12 +51,11 @@ const User = database.define('users', {
         type: DataTypes.DATE,
         allowNull: true,
       }
+}, {
+  timestamps: false,
 });
 
-Role.hasOne(User, {foreignKey : 'user_role_id' , sourceKey: 'role_id'});
-User.belongsTo(Role, {foreignKey: 'user_role_id', targetKey: 'role_id'});
-
-Status.hasOne(User, {foreignKey : 'status_id' , sourceKey: 'status_id'});
-User.belongsTo(Status, {foreignKey: 'status_id', targetKey: 'status_id'});
+User.belongsTo(Status, { foreignKey: 'status_id', targetKey: 'status_id' });
+Status.hasMany(User, { foreignKey: 'status_id', sourceKey: 'status_id' });
 
 module.exports = { User };

@@ -13,7 +13,7 @@ const verify = async (req, res, next) => {
     if (!token) {
       return res.status(401).send({
         status: 'ERROR',
-        error: { code: '2', message: 'Access Denied. No token provided.' },
+        error: { message: 'Access Denied. No token provided.' },
       });
     }
 
@@ -32,7 +32,7 @@ const verify = async (req, res, next) => {
     if (!adminUser) {
       return res.status(404).send({
         status: 'ERROR',
-        error: { code: '3', message: 'User not found.' },
+        error: { message: 'User not found.' },
       });
     }
 
@@ -45,7 +45,7 @@ const verify = async (req, res, next) => {
     // Handle invalid token or other errors
     return res.status(400).send({
       status: 'ERROR',
-      error: { code: '25', message: 'Invalid token.' },
+      error: { message: 'Invalid token.' },
     });
   }
 };
