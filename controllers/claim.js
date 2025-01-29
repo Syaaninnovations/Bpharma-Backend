@@ -139,4 +139,4 @@ const listClaims = async (req, res) => {
 
 
 
-module.exports = { insertClaim, updateClaim, viewClaim, viewClaim, listClaims};
+module.exports = { insertClaim, updateClaim, viewClaim, listClaims};

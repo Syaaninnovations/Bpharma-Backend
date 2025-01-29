@@ -34,8 +34,6 @@ const Role = database.define('roles', {
         type: DataTypes.INTEGER,
         allowNull: true,
     }
-}, {
-    timestamps: false,
 });
 
 module.exports = { Role };

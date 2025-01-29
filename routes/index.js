@@ -12,6 +12,8 @@ const ProductController = require('../controllers/product');
 const ExpiryController = require('../controllers/expiry');
 const SampleController = require('../controllers/sample');
 const ClaimController = require('../controllers/claim');
+const ClaimLogController = require('../controllers/claimlog');
+const OfferController = require('../controllers/offer');
 
 router.post('/login', UserController.login);
 
@@ -80,9 +82,21 @@ router.put('/update-claim/:id', verify, ClaimController.updateClaim);
 router.get('/view-claim/:id', verify, ClaimController.viewClaim);
 router.get('/list-claim', verify,ClaimController.listClaims);
 
+// ClaimLog Module
+router.post('/insert-claim-log', verify, ClaimLogController.insertClaimLog);
+router.put('/update-claim-log/:id', verify, ClaimLogController.updateClaimLog);
+router.get('/view-claim-log/:id', verify, ClaimLogController.viewClaimLog);
+router.get('/list-claim-log', verify,ClaimLogController.listClaimLogs);
+
+// Offer Module
+router.post('/insert-offer', verify, OfferController.insertOffer);
+router.put('/update-offer/:id', verify, OfferController.updateOffer);
+router.get('/view-offer/:id', verify, OfferController.viewOffer);
+router.get('/list-offer', verify,OfferController.listOffers);
+
 const syncdb = async (request, response) => {
 
-    const { Role }  = require('../models/role');
+    const { Offer }  = require('../models/offer');
     
     const sequelize = require('../config/db');
    
