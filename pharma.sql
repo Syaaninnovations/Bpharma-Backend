@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jan 29, 2025 at 04:51 PM
+-- Host: localhost
+-- Generation Time: Mar 05, 2025 at 05:46 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -70,6 +70,56 @@ CREATE TABLE `claim_log` (
 
 INSERT INTO `claim_log` (`claim_log_id`, `claim_id`, `product_id`, `free_qty`, `total_qty`, `created_on`, `created_by`, `updated_on`, `updated_by`, `remarks`, `status_id`, `requested_date`) VALUES
 (1, 1, 1, 5, 5, '2025-01-08 04:44:39', 1, '2025-01-08 04:46:30', 1, 'Remark Data Update', 1, '2024-01-02');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compliment`
+--
+
+CREATE TABLE `compliment` (
+  `complimentsId` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 0,
+  `created_on` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL,
+  `compliments_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `compliment`
+--
+
+INSERT INTO `compliment` (`complimentsId`, `is_active`, `created_on`, `created_by`, `updated_on`, `updated_by`, `compliments_name`) VALUES
+(1, 0, '2025-03-04 09:17:55', 1, '2025-03-04 09:21:34', 1, 'Update Compliment Test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `compliment_request`
+--
+
+CREATE TABLE `compliment_request` (
+  `complimentsRequestId` int(11) NOT NULL,
+  `compliment_id` int(11) NOT NULL,
+  `remark` varchar(255) NOT NULL,
+  `qty` int(11) NOT NULL,
+  `is_active` tinyint(1) NOT NULL DEFAULT 0,
+  `request_date` datetime DEFAULT NULL,
+  `request_by` int(11) DEFAULT NULL,
+  `created_on` datetime NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `updated_on` datetime DEFAULT NULL,
+  `updated_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `compliment_request`
+--
+
+INSERT INTO `compliment_request` (`complimentsRequestId`, `compliment_id`, `remark`, `qty`, `is_active`, `request_date`, `request_by`, `created_on`, `created_by`, `updated_on`, `updated_by`) VALUES
+(3, 1, 'Test Remark Update', 15, 0, '2025-03-05 04:25:51', 2, '2025-03-05 04:25:51', 1, '2025-03-05 04:39:48', 1);
 
 -- --------------------------------------------------------
 
@@ -447,6 +497,21 @@ ALTER TABLE `claim_log`
   ADD KEY `status_id` (`status_id`);
 
 --
+-- Indexes for table `compliment`
+--
+ALTER TABLE `compliment`
+  ADD PRIMARY KEY (`complimentsId`),
+  ADD KEY `created_by` (`created_by`);
+
+--
+-- Indexes for table `compliment_request`
+--
+ALTER TABLE `compliment_request`
+  ADD PRIMARY KEY (`complimentsRequestId`),
+  ADD KEY `compliment_id` (`compliment_id`),
+  ADD KEY `request_by` (`request_by`);
+
+--
 -- Indexes for table `country`
 --
 ALTER TABLE `country`
@@ -486,6 +551,18 @@ ALTER TABLE `district`
   ADD UNIQUE KEY `district_code_20` (`district_code`),
   ADD UNIQUE KEY `district_code_21` (`district_code`),
   ADD UNIQUE KEY `district_code_22` (`district_code`),
+  ADD UNIQUE KEY `district_code_23` (`district_code`),
+  ADD UNIQUE KEY `district_code_24` (`district_code`),
+  ADD UNIQUE KEY `district_code_25` (`district_code`),
+  ADD UNIQUE KEY `district_code_26` (`district_code`),
+  ADD UNIQUE KEY `district_code_27` (`district_code`),
+  ADD UNIQUE KEY `district_code_28` (`district_code`),
+  ADD UNIQUE KEY `district_code_29` (`district_code`),
+  ADD UNIQUE KEY `district_code_30` (`district_code`),
+  ADD UNIQUE KEY `district_code_31` (`district_code`),
+  ADD UNIQUE KEY `district_code_32` (`district_code`),
+  ADD UNIQUE KEY `district_code_33` (`district_code`),
+  ADD UNIQUE KEY `district_code_34` (`district_code`),
   ADD KEY `state_id` (`state_id`),
   ADD KEY `country_id` (`country_id`);
 
@@ -506,6 +583,17 @@ ALTER TABLE `employees`
   ADD UNIQUE KEY `emp_code_10` (`emp_code`),
   ADD UNIQUE KEY `emp_code_11` (`emp_code`),
   ADD UNIQUE KEY `emp_code_12` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_13` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_14` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_15` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_16` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_17` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_18` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_19` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_20` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_21` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_22` (`emp_code`),
+  ADD UNIQUE KEY `emp_code_23` (`emp_code`),
   ADD KEY `district_id` (`district_id`),
   ADD KEY `distributer_id` (`distributer_id`),
   ADD KEY `status_id` (`status_id`);
@@ -541,7 +629,18 @@ ALTER TABLE `products`
   ADD UNIQUE KEY `product_code_7` (`product_code`),
   ADD UNIQUE KEY `product_code_8` (`product_code`),
   ADD UNIQUE KEY `product_code_9` (`product_code`),
-  ADD UNIQUE KEY `product_code_10` (`product_code`);
+  ADD UNIQUE KEY `product_code_10` (`product_code`),
+  ADD UNIQUE KEY `product_code_11` (`product_code`),
+  ADD UNIQUE KEY `product_code_12` (`product_code`),
+  ADD UNIQUE KEY `product_code_13` (`product_code`),
+  ADD UNIQUE KEY `product_code_14` (`product_code`),
+  ADD UNIQUE KEY `product_code_15` (`product_code`),
+  ADD UNIQUE KEY `product_code_16` (`product_code`),
+  ADD UNIQUE KEY `product_code_17` (`product_code`),
+  ADD UNIQUE KEY `product_code_18` (`product_code`),
+  ADD UNIQUE KEY `product_code_19` (`product_code`),
+  ADD UNIQUE KEY `product_code_20` (`product_code`),
+  ADD UNIQUE KEY `product_code_21` (`product_code`);
 
 --
 -- Indexes for table `roles`
@@ -586,6 +685,18 @@ ALTER TABLE `state`
   ADD UNIQUE KEY `state_code_22` (`state_code`),
   ADD UNIQUE KEY `state_code_23` (`state_code`),
   ADD UNIQUE KEY `state_code_24` (`state_code`),
+  ADD UNIQUE KEY `state_code_25` (`state_code`),
+  ADD UNIQUE KEY `state_code_26` (`state_code`),
+  ADD UNIQUE KEY `state_code_27` (`state_code`),
+  ADD UNIQUE KEY `state_code_28` (`state_code`),
+  ADD UNIQUE KEY `state_code_29` (`state_code`),
+  ADD UNIQUE KEY `state_code_30` (`state_code`),
+  ADD UNIQUE KEY `state_code_31` (`state_code`),
+  ADD UNIQUE KEY `state_code_32` (`state_code`),
+  ADD UNIQUE KEY `state_code_33` (`state_code`),
+  ADD UNIQUE KEY `state_code_34` (`state_code`),
+  ADD UNIQUE KEY `state_code_35` (`state_code`),
+  ADD UNIQUE KEY `state_code_36` (`state_code`),
   ADD KEY `country_id` (`country_id`);
 
 --
@@ -624,6 +735,18 @@ ALTER TABLE `claims`
 --
 ALTER TABLE `claim_log`
   MODIFY `claim_log_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `compliment`
+--
+ALTER TABLE `compliment`
+  MODIFY `complimentsId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `compliment_request`
+--
+ALTER TABLE `compliment_request`
+  MODIFY `complimentsRequestId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `country`
@@ -711,16 +834,29 @@ ALTER TABLE `user_roles`
 -- Constraints for table `claims`
 --
 ALTER TABLE `claims`
-  ADD CONSTRAINT `claims_ibfk_5` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `claims_ibfk_6` FOREIGN KEY (`distributor_id`) REFERENCES `distributor` (`distributor_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `claims_ibfk_27` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `claims_ibfk_28` FOREIGN KEY (`distributor_id`) REFERENCES `distributor` (`distributor_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `claim_log`
 --
 ALTER TABLE `claim_log`
-  ADD CONSTRAINT `claim_log_ibfk_4` FOREIGN KEY (`claim_id`) REFERENCES `claims` (`claim_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `claim_log_ibfk_5` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `claim_log_ibfk_6` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `claim_log_ibfk_36` FOREIGN KEY (`claim_id`) REFERENCES `claims` (`claim_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `claim_log_ibfk_37` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `claim_log_ibfk_38` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `compliment`
+--
+ALTER TABLE `compliment`
+  ADD CONSTRAINT `compliment_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Constraints for table `compliment_request`
+--
+ALTER TABLE `compliment_request`
+  ADD CONSTRAINT `compliment_request_ibfk_1` FOREIGN KEY (`compliment_id`) REFERENCES `compliment` (`complimentsId`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `compliment_request_ibfk_2` FOREIGN KEY (`request_by`) REFERENCES `employees` (`emp_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `distributor`
@@ -732,38 +868,38 @@ ALTER TABLE `distributor`
 -- Constraints for table `district`
 --
 ALTER TABLE `district`
-  ADD CONSTRAINT `district_ibfk_43` FOREIGN KEY (`state_id`) REFERENCES `state` (`state_id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `district_ibfk_44` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+  ADD CONSTRAINT `district_ibfk_67` FOREIGN KEY (`state_id`) REFERENCES `state` (`state_id`) ON DELETE SET NULL ON UPDATE CASCADE,
+  ADD CONSTRAINT `district_ibfk_68` FOREIGN KEY (`country_id`) REFERENCES `country` (`country_id`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
 -- Constraints for table `employees`
 --
 ALTER TABLE `employees`
-  ADD CONSTRAINT `employees_ibfk_34` FOREIGN KEY (`district_id`) REFERENCES `district` (`district_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `employees_ibfk_35` FOREIGN KEY (`distributer_id`) REFERENCES `distributor` (`distributor_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `employees_ibfk_36` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `employees_ibfk_67` FOREIGN KEY (`district_id`) REFERENCES `district` (`district_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_68` FOREIGN KEY (`distributer_id`) REFERENCES `distributor` (`distributor_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `employees_ibfk_69` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `expiries`
 --
 ALTER TABLE `expiries`
-  ADD CONSTRAINT `expiries_ibfk_13` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `expiries_ibfk_14` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `expiries_ibfk_35` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `expiries_ibfk_36` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `offers`
 --
 ALTER TABLE `offers`
-  ADD CONSTRAINT `offers_ibfk_1` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `offers_ibfk_2` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `offers_ibfk_3` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `offers_ibfk_31` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `offers_ibfk_32` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `offers_ibfk_33` FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `sample_requests`
 --
 ALTER TABLE `sample_requests`
-  ADD CONSTRAINT `sample_requests_ibfk_10` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `sample_requests_ibfk_9` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `sample_requests_ibfk_31` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `sample_requests_ibfk_32` FOREIGN KEY (`requested_emp_id`) REFERENCES `employees` (`emp_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Constraints for table `state`
@@ -781,8 +917,8 @@ ALTER TABLE `users`
 -- Constraints for table `user_roles`
 --
 ALTER TABLE `user_roles`
-  ADD CONSTRAINT `user_roles_ibfk_33` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `user_roles_ibfk_34` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `user_roles_ibfk_55` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `user_roles_ibfk_56` FOREIGN KEY (`role_id`) REFERENCES `roles` (`role_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

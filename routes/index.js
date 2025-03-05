@@ -14,6 +14,8 @@ const SampleController = require('../controllers/sample');
 const ClaimController = require('../controllers/claim');
 const ClaimLogController = require('../controllers/claimlog');
 const OfferController = require('../controllers/offer');
+const ComplimentController = require('../controllers/compliment');
+const ComplimentRequestController = require('../controllers/complimentRequest');
 
 router.post('/login', UserController.login);
 
@@ -94,10 +96,23 @@ router.put('/update-offer/:id', verify, OfferController.updateOffer);
 router.get('/view-offer/:id', verify, OfferController.viewOffer);
 router.get('/list-offer', verify,OfferController.listOffers);
 
+// Compliment Module
+router.post('/insert-compliment', verify, ComplimentController.insertCompliment);
+router.put('/update-compliment/:id', verify, ComplimentController.updateCompliment);
+router.get('/view-compliment/:id', verify, ComplimentController.getCompliment);
+router.get('/list-compliment', verify,ComplimentController.listCompliment);
+
+// ComplimentRequest Module
+router.post('/insert-compliment-request', verify, ComplimentRequestController.insertComplimentRequest);
+router.put('/update-compliment-request/:id', verify, ComplimentRequestController.updateComplimentRequest);
+router.get('/view-compliment-request/:id', verify, ComplimentRequestController.getComplimentRequest);
+router.get('/list-compliment-request', verify,ComplimentRequestController.listComplimentRequest);
+
 const syncdb = async (request, response) => {
 
-    const { Offer }  = require('../models/offer');
-    
+    //const { Offer }  = require('../models/offer');
+    const { Compliments }  = require('../models/compliments');
+    const { ComplimentsRequest }  = require('../models/complimentsRequest');
     const sequelize = require('../config/db');
    
     await sequelize.authenticate();
